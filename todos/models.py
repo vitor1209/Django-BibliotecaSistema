@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class livros(models.Model):
@@ -14,7 +15,21 @@ class livros(models.Model):
     anoPublicacao = models.DateField(
         verbose_name="Ano de Publicação", null=False, blank=False
     )
-    dataAlugou = models.DateTimeField(null=True)
-    nomeAlugou = models.CharField(max_length=100, null=True)
-    telefoneAlugou = models.IntegerField(max_length=11, null=True)
+    dataAlugou = models.DateField (verbose_name="Data do Aluguel", null=True)
+    nomeAlugou = models.CharField(
+        verbose_name="Nome do Locador", max_length=100, null=True
+    )
+    telefoneAlugou = models.IntegerField(
+        verbose_name="Telefone do Locador", max_length=11, null=True
+    )
     dataDevol = models.DateTimeField(null=True)
+
+    class Meta:
+        ordering = ["titulo"]
+
+    def markTime(self):
+        self.dataDevol = datetime.now()
+        self.dataAlugou = None
+        self.nomeAlugou = None
+        self.telefoneAlugou = None
+        self.save()

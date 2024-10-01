@@ -17,10 +17,13 @@ Incluindo outro URLconf
 
 from django.contrib import admin
 from django.urls import path
-from todos.views import BibliotecaListView, BibliotecaCreateView
+from todos.views import BibliotecaListView, BibliotecaCreateView, BibliotecaUpdateView , BibliotecaDeleteView ,BibliotecaTimeView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", BibliotecaListView.as_view(), name="livros_list"),
     path("create", BibliotecaCreateView.as_view(), name="livros_create"),
+    path("update/<int:pk>", BibliotecaUpdateView.as_view(), name="livros_Update"),
+    path("delete/<int:pk>" , BibliotecaDeleteView.as_view(), name="livros_Delete"),
+    path("complete/<int:pk>" , BibliotecaTimeView.as_view(), name="livros_Time"),   
 ]

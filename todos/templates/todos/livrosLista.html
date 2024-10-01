@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-Lista de Livros
 {% endblock page_title %}
 
 {% block content %}
@@ -35,18 +34,23 @@ Lista de Livros
           <td>{{livro.anoPublicacao}}</td>
           <td>{{livro.dataAlugou|default:"-"}}</td>
           <td>{{livro.nomeAlugou|default:"-"}}</td>
-          <td>{{livro.telefoneAlugou|default:"-"}}</td>
-          <td>{{livro.dataDevol|default:"-"}}</td>
+          <td>{{ livro.telefoneAlugou|default:"-" }}</td>
+          {% if livro.nomeAlugou %}
+              <td>{{ "-" }}</td>
+          {% else %}
+              <td>{{ livro.dataDevol|default:"-" }}</td>
+          {% endif %}
           <td>
-            <a href="#" class="btn btn-success btn-sm mb-2">Alugar</a>
-            <a href="#" class="btn btn-danger btn-sm mb-2">Devolver</a>
+            <a href="{% url 'livros_Update'  pk=livro.pk %}" class="btn btn-success btn-sm mb-2 {% if livro.dataAlugou %}disabled{% endif %}">Alugar</a>
+            <a href="{% url 'livros_Time' pk=livro.pk %}" class="btn btn-warning btn-sm mb-2 {% if not livro.dataAlugou %}disabled{% endif %} ">Devolver</a>
+            <a href="{% url 'livros_Delete' pk=livro.pk %}" class="btn btn-danger btn-sm mb-2">Excluír</a>
           </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
     {% else %}
-    <p>Não há tarefas cadastradas</p>
+    <p>Não há livros cadastradas</p>
 
     {% endif %}
     <a href="{% url "livros_create" %}" class="btn btn-primary">Novo Livro</a>
