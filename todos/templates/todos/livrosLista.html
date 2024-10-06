@@ -36,7 +36,7 @@
           <td>{{livro.nomeAlugou|default:"-"}}</td>
           <td>{{ livro.telefoneAlugou|default:"-" }}</td>
           {% if livro.nomeAlugou %}
-              <td>{{ "-" }}</td>
+              <td>{{ livro.dataDevol = None }}</td>
           {% else %}
               <td>{{ livro.dataDevol|default:"-" }}</td>
           {% endif %}

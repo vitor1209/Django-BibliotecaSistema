@@ -18,6 +18,7 @@ class BibliotecaCreateView(CreateView):
 class BibliotecaUpdateView(UpdateView):
     model = livros
     template_name = "todos/livrosForms.html"
+    livros.dataDevol = None
     fields = ["dataAlugou", "nomeAlugou", "telefoneAlugou"]
     success_url = reverse_lazy("livros_list")
 
